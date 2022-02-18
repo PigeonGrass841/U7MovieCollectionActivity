@@ -186,6 +186,7 @@ public class MovieCollection
                 }
                 cast = cast.substring(cast.indexOf("|") + 1);
             }
+            list.add(cast);
         }
 
         // Creates a list of all cast members with the keyword in its name.
@@ -217,7 +218,7 @@ public class MovieCollection
         }
 
         System.out.print("Enter a cast member by number: ");
-        searchTerm = castMembers.get(scanner.nextInt());
+        searchTerm = castMembers.get(scanner.nextInt() - 1);
 
         // prevent case sensitivity
         searchTerm = searchTerm.toLowerCase();
