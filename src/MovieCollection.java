@@ -98,7 +98,7 @@ public class MovieCollection
 
             if (movieTitle.indexOf(searchTerm) != -1)
             {
-                //add the Movie objest to the results list
+                //add the Movie object to the results list
                 results.add(movies.get(i));
             }
         }
@@ -164,76 +164,29 @@ public class MovieCollection
 
     private void searchCast()
     {
+
+    }
+
+    private void searchKeywords()
+    {
         System.out.print("Enter a keyword search term: ");
         String searchTerm = scanner.nextLine();
 
         // prevent case sensitivity
         searchTerm = searchTerm.toLowerCase();
 
-        ArrayList<String> list = new ArrayList<String>();
-        ArrayList<String> castMembers = new ArrayList<String>();
-        String cast;
-
-        // Creates a list of all cast members.
-        for (Movie m : movies)
-        {
-            cast = m.getCast();
-            while (cast.indexOf("|") != -1)
-            {
-                if (list.indexOf(cast.substring(0, cast.indexOf("|"))) == -1)
-                {
-                    list.add(cast.substring(0, cast.indexOf("|")));
-                }
-                cast = cast.substring(cast.indexOf("|") + 1);
-            }
-            list.add(cast);
-        }
-
-        // Creates a list of all cast members with the keyword in its name.
-        for (String member : list)
-        {
-            if (member.toLowerCase().indexOf(searchTerm) != -1)
-            {
-                castMembers.add(member);
-            }
-        }
-
-        // Sorts the castMembers arrayList alphabetically.
-        for (int i = 1; i < castMembers.size(); i++)
-        {
-            String temp = castMembers.get(i);
-            int possibleIndex = i;
-            while (possibleIndex > 0 && temp.compareTo(castMembers.get(possibleIndex - 1)) < 0)
-            {
-                castMembers.set(possibleIndex, castMembers.get(possibleIndex - 1));
-                possibleIndex--;
-            }
-            castMembers.set(possibleIndex, temp);
-        }
-
-        // Prints out each cast member in castMembers.
-        for (int i = 0; i < castMembers.size(); i++)
-        {
-            System.out.println((i + 1) + ". " + castMembers.get(i));
-        }
-
-        System.out.print("Enter a cast member by number: ");
-        searchTerm = castMembers.get(scanner.nextInt() - 1);
-
-        // prevent case sensitivity
-        searchTerm = searchTerm.toLowerCase();
-
+        // arraylist to hold search results
         ArrayList<Movie> results = new ArrayList<Movie>();
 
         // search through ALL movies in collection
         for (int i = 0; i < movies.size(); i++)
         {
-            String movieCast = movies.get(i).getCast();
-            movieCast = movieCast.toLowerCase();
+            String movieKeywords = movies.get(i).getKeywords();
+            movieKeywords = movieKeywords.toLowerCase();
 
-            if (movieCast.indexOf(searchTerm) != -1)
+            if (movieKeywords.indexOf(searchTerm) != -1)
             {
-                //add the Movie objest to the results list
+                //add the Movie object to the results list
                 results.add(movies.get(i));
             }
         }
@@ -253,58 +206,6 @@ public class MovieCollection
         }
 
         System.out.println("Which movie would you like to learn more about?");
-        System.out.print("Enter number: ");
-
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
-        Movie selectedMovie = results.get(choice - 1);
-
-        displayMovieInfo(selectedMovie);
-
-        System.out.println("\n ** Press Enter to Return to Main Menu **");
-        scanner.nextLine();
-    }
-
-    private void searchKeywords()
-    {
-        System.out.print("Enter a keyword search term: ");
-        String searchTerm = scanner.nextLine();
-
-        // prevent case sensitivity
-        searchTerm = searchTerm.toLowerCase();
-
-        // arraylist to hold search results
-        ArrayList<Movie> results = new ArrayList<Movie>();
-
-        // search through ALL movies in collection
-        for (int i = 0; i < movies.size(); i++)
-        {
-            String movieTitle = movies.get(i).getKeywords();
-            movieTitle = movieTitle.toLowerCase();
-
-            if (movieTitle.indexOf(searchTerm) != -1)
-            {
-                //add the Movie objest to the results list
-                results.add(movies.get(i));
-            }
-        }
-
-        // sort the results by title
-        sortResults(results);
-
-        // now, display them all to the user
-        for (int i = 0; i < results.size(); i++)
-        {
-            String title = results.get(i).getTitle();
-
-            // this will print index 0 as choice 1 in the results list; better for user!
-            int choiceNum = i + 1;
-
-            System.out.println("" + choiceNum + ". " + title);
-        }
-
-        System.out.println("Which keyword would you like to learn more about?");
         System.out.print("Enter number: ");
 
         int choice = scanner.nextInt();
