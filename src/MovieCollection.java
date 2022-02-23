@@ -426,12 +426,120 @@ public class MovieCollection
 
     private void listHighestRated()
     {
+        // arraylist to hold the top 50 highest rated movies
+        ArrayList<Movie> highestRatedMovies = new ArrayList<Movie>();
 
+        // adds the first 50 movies to highestRatedMovies
+        for (int i = 0; i < 50; i++)
+        {
+            highestRatedMovies.add(movies.get(i));
+        }
+
+        // search through ALL movies in collection
+        double movieRating;
+
+        for (int i = 50; i < movies.size(); i++)
+        {
+            movieRating = movies.get(i).getUserRating();
+
+            for (int j = 0; j < highestRatedMovies.size(); j++)
+            {
+                if (movieRating > highestRatedMovies.get(j).getUserRating())
+                {
+                    highestRatedMovies.add(j, movies.get(i));
+                    j = highestRatedMovies.size();
+                }
+                if (highestRatedMovies.size() > 50)
+                {
+                    highestRatedMovies.remove(highestRatedMovies.size() - 1);
+                    j--;
+                }
+            }
+        }
+
+        // now, display them all to the user
+        for (int i = 0; i < highestRatedMovies.size(); i++)
+        {
+            String title = highestRatedMovies.get(i).getTitle();
+            movieRating = highestRatedMovies.get(i).getUserRating();
+
+            // this will print index 0 as choice 1 in the results list; better for user!
+            int choiceNum = i + 1;
+
+            System.out.println("" + choiceNum + ". " + title + ": " + movieRating);
+        }
+
+        System.out.println("Which movie would you like to learn more about?");
+        System.out.print("Enter number: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        Movie selectedMovie = highestRatedMovies.get(choice - 1);
+
+        displayMovieInfo(selectedMovie);
+
+        System.out.println("\n ** Press Enter to Return to Main Menu **");
+        scanner.nextLine();
     }
 
     private void listHighestRevenue()
     {
+    // arraylist to hold the top 50 highest earning movies
+        ArrayList<Movie> highestEarningMovies = new ArrayList<Movie>();
 
+        // adds the first 50 movies to highestRatedMovies
+        for (int i = 0; i < 50; i++)
+        {
+            highestEarningMovies.add(movies.get(i));
+        }
+
+        // search through ALL movies in collection
+        double movieRevenue;
+
+        for (int i = 50; i < movies.size(); i++)
+        {
+            movieRevenue = movies.get(i).getRevenue();
+
+            for (int j = 0; j < highestEarningMovies.size(); j++)
+            {
+                if (movieRevenue > highestEarningMovies.get(j).getRevenue())
+                {
+                    highestEarningMovies.add(j, movies.get(i));
+                    j = highestEarningMovies.size();
+                }
+                if (highestEarningMovies.size() > 50)
+                {
+                    highestEarningMovies.remove(highestEarningMovies.size() - 1);
+                    j--;
+                }
+            }
+        }
+
+        // now, display them all to the user
+        for (int i = 0; i < highestEarningMovies.size(); i++)
+        {
+            String title = highestEarningMovies.get(i).getTitle();
+            movieRevenue = highestEarningMovies.get(i).getRevenue();
+
+            // this will print index 0 as choice 1 in the results list; better for user!
+            int choiceNum = i + 1;
+
+            System.out.println("" + choiceNum + ". " + title + ": " + movieRevenue);
+        }
+
+        System.out.println("Which movie would you like to learn more about?");
+        System.out.print("Enter number: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        Movie selectedMovie = highestEarningMovies.get(choice - 1);
+
+        displayMovieInfo(selectedMovie);
+
+        System.out.println("\n ** Press Enter to Return to Main Menu **");
+        scanner.nextLine();
     }
 
     private void importMovieList(String fileName)
