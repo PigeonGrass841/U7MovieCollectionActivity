@@ -500,9 +500,9 @@ public class MovieCollection
         }
 
         // search through ALL movies in collection
-        double movieRevenue;
+        int movieRevenue;
 
-        for (int i = 0; i < movies.size() - 1; i++)
+        for (int i = 50; i < movies.size() - 1; i++)
         {
             movieRevenue = movies.get(i).getRevenue();
 
@@ -530,7 +530,7 @@ public class MovieCollection
             // this will print index 0 as choice 1 in the results list; better for user!
             int choiceNum = i + 1;
 
-            System.out.println("" + choiceNum + ". " + title + ": " + movieRevenue);
+            System.out.println("" + choiceNum + ". " + title + ": $" + movieRevenue);
         }
 
         System.out.println("Which movie would you like to learn more about?");
