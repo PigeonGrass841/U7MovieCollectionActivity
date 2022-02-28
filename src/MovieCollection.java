@@ -36,6 +36,7 @@ public class MovieCollection
             System.out.println("- see all movies of a (g)enre");
             System.out.println("- list top 50 (r)ated movies");
             System.out.println("- list top 50 (h)igest revenue movies");
+            System.out.println("- calculate (b)acon number");
             System.out.println("- (q)uit");
             System.out.print("Enter choice: ");
             menuOption = scanner.nextLine();
@@ -72,6 +73,10 @@ public class MovieCollection
         else if (option.equals("h"))
         {
             listHighestRevenue();
+        }
+        else if (option.equals("b"))
+        {
+            calculateBaconNum();
         }
         else
         {
@@ -224,7 +229,7 @@ public class MovieCollection
         String member = castMembers.get(scanner.nextInt() - 1);
 
         // prevent case sensitivity
-        member = searchTerm.toLowerCase();
+        member = member.toLowerCase();
 
         ArrayList<Movie> results = new ArrayList<Movie>();
 
@@ -236,7 +241,7 @@ public class MovieCollection
 
             if (movieCast.indexOf(member) != -1)
             {
-                //add the Movie objest to the results list
+                //add the Movie object to the results list
                 results.add(movies.get(i));
             }
         }
@@ -438,7 +443,7 @@ public class MovieCollection
         // search through ALL movies in collection
         double movieRating;
 
-        for (int i = 50; i < movies.size(); i++)
+        for (int i = 0; i < movies.size() - 1; i++)
         {
             movieRating = movies.get(i).getUserRating();
 
@@ -497,7 +502,7 @@ public class MovieCollection
         // search through ALL movies in collection
         double movieRevenue;
 
-        for (int i = 50; i < movies.size(); i++)
+        for (int i = 0; i < movies.size() - 1; i++)
         {
             movieRevenue = movies.get(i).getRevenue();
 
@@ -540,6 +545,11 @@ public class MovieCollection
 
         System.out.println("\n ** Press Enter to Return to Main Menu **");
         scanner.nextLine();
+    }
+
+    private void calculateBaconNum()
+    {
+
     }
 
     private void importMovieList(String fileName)
